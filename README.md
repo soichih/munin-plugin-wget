@@ -22,6 +22,6 @@ Add your configuration in /etc/munin/plugin-conf.d/wget and specify parameters t
 
 ```
 [wget]
-env.url "http://google.com"
+env.url http://google.com
 ```
 
