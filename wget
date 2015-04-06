@@ -47,10 +47,17 @@ function print() {
             }
         });
         res.on('end', function() {
-            console.log("download.value "+(new Date().getTime() - download_start));
+            var end = new Date().getTime();
+            if(download_start) {
+                console.log("download.value "+(end - download_start));
+            } else {
+                console.log("download.value 0");
+                console.log("ttfb.value "+(end - start));
+            }
             console.log("size.value "+body.length);
-            //console.dir(body);
         });
+    }).on('error', function(err) {
+        //console.dir(err);
     });  
 }
 
