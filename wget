@@ -1,0 +1,56 @@
+#!/usr/bin/node
+var http = require('http');
+
+/*
+var download = function(url, dest, cb) {
+  var request = http.get(url, function(response) {
+    response.pipe(file);
+    file.on('finish', function() {
+      file.close(cb);
+    });
+  });
+}
+*/
+
+//list of parameters to monitor
+var url = "http://google.com";
+if(process.env.url) {
+    url = process.env.url;
+}
+
+mode=process.argv[2];
+switch(mode) {
+    case "config": 
+        config(); 
+        break;
+    default: print();
+}
+
+function config() {
+    console.log("graph_title wget");
+    console.log("graph_info "+url);
+    console.log("ttfb.label Waiting (TTFB) (msec)");
+    console.log("download.label Download (msec)"); 
+    console.log("size.label Download (bytes)"); 
+}
+
+function print() {
+    var start = new Date().getTime();
+    http.get(url, function(res) {
+        var body = '';
+        var download_start = null;
+        res.on('data', function(chunk) {
+            body += chunk;
+            if(!download_start) {
+                download_start = new Date().getTime();
+                console.log("ttfb.value "+(download_start - start));
+            }
+        });
+        res.on('end', function() {
+            console.log("download.value "+(new Date().getTime() - download_start));
+            console.log("size.value "+body.length);
+            //console.dir(body);
+        });
+    });  
+}
+
