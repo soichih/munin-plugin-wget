@@ -1,0 +1,18 @@
+{
+  "name": "munin-plugin-wget",
+  "version": "0.0.0",
+  "description": "This plugin will download content from specified URL, and report the time it takes to download as well as the size of the output.",
+  "main": "wget",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/soichih/munin-plugin-wget.git"
+  },
+  "author": "Soichi Hayashi <hayashis@iu.edu>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soichih/munin-plugin-wget/issues"
+  }
+}
